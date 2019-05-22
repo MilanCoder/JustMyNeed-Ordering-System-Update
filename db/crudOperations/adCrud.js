@@ -88,11 +88,13 @@ else {
                             Bucket:"big-basket-state-store",
                             Key:subad.imageobj.key
                           },(err,data)=>{
+                             
                               
-                            if(err.NotFound==null){
+                            if(data==null){
                               res.status(200).json(obj);
                          }
-                         else if(err.NotFound!=null){
+                        
+                         else if(data!=null){
                             s3.deleteObject({
                                 Bucket:"big-basket-state-store",
                                 Key:subad.imageobj.key
@@ -102,18 +104,19 @@ else {
                                 res.status(403).json('Multer Error')
                                }
                                else if(data.DeleteMarker==true){
-                                 
+                                 console.log('yes')
                                 res.status(200).json(obj);
                                }
                               })}
                           })
+                        
 
-                   }else{
+                        }else{
                     res.status(200).json(obj);
                    }}
                })
                if(ifFound==false){
-                res.status(403).json('No Label Found');
+                res.status(200).json(obj);
             }
             }catch(e){
                 res.status(403).json('Logical Backend Error');
