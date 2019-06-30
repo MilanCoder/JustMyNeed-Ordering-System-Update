@@ -9,7 +9,7 @@ adRoutes.get('/getAds',(req,res)=>{
 })
 
 adRoutes.get('/getAllAds',(req,res)=>{
-    console.log('i m here')
+   
     adcrud.getAllAds(res);
 })
 

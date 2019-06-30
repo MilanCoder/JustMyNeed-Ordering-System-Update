@@ -1,12 +1,12 @@
 const multer=require('multer');
 const path=require('path');
-
+const awskey = require('./awskey');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 
 aws.config.update({
-  secretAccessKey: "",
-  accessKeyId: "",
+  secretAccessKey: awskey.secretAccessKey,
+  accessKeyId: awskey.accessKeyId,
   region: "ap-south-1"
 });
 
@@ -35,10 +35,10 @@ const adupload = multer({
       key: function(req, file, cb){
           cb(null,file.fieldname +'-'+req.body.category+'-'+req.body.label+'_'+Date.now());  }
     }),
-  //  limits:{fileSize:1000000000},
-  //  fileFilter:function(res,file,cb){
-  //       checkFileType(file,cb)
-  //   }
+   limits:{fileSize:2000000},
+   fileFilter:function(res,file,cb){
+        checkFileType(file,cb)
+    }
   }).single('adImage');
 
 

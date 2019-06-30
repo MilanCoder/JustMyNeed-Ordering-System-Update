@@ -3,16 +3,10 @@ const empCrud= require('../schemas/empSchema');
 
 //-milan
 const adminCrud={
-async login(res,object){
-    var user=await admin.findOne({'id':object.id,'name':object.name})
-       if(user!=null){
-         if(object.password == user.password){
-          console.log('we were here 222');
-    return new Promise((resolve,reject)=>{
-      resolve(user);
-    
-    }) 
-}}},
+async login(object){
+    var user=await admin.findOne({'id':object.id,'name':object.name});
+          return user
+},
 getUnverifiedEmployees(res){
 empCrud.find({isVerified:false},(err,users)=>{
   if(err){

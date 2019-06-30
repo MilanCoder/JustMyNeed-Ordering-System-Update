@@ -21,12 +21,16 @@ const adminRoutes=require('./api/routes/adminRoutes');
 const vendorProductRoutes=require('./api/routes/vendorProductsRoutes');
 const productRoutes=require('./api/routes/productRoutes');
 const adRoutes = require('./api/routes/adRoutes');
+const customerRoutes = require('./api/routes/customerRoutes')
+const footerRoutes = require('./api/routes/footerApi');
 
+app.use('/footer',footerRoutes);
 app.use('/employee',empRoutes); 
 app.use('/admin',adminRoutes);  
 app.use('/products',productRoutes); 
 app.use('/vendorProducts',vendorProductRoutes);   
-app.use('/ad',adRoutes);               //use routes
+app.use('/ad',adRoutes);   
+app.use('/customer',customerRoutes)            //use routes
 //app.use('/user');
 
 

@@ -1,19 +1,19 @@
 const multer=require('multer');
 const path=require('path');
-
+const awskey = require('./awskey');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 
 aws.config.update({
-  secretAccessKey: "",
-  accessKeyId: "",
+    secretAccessKey: awskey.secretAccessKey,
+    accessKeyId: awskey.accessKeyId,
   region: "ap-south-1"
 });
 
 const s3 = new aws.S3();
 
 function checkFileType(file,cb){
-    const filetypes =/jpeg|png|jpg|gif/;
+    const filetypes =/jpeg|png|jpg/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
     if(extname && mimetype){
@@ -33,12 +33,12 @@ const upload = multer({
           cb(null, {fieldName: file.fieldname});
       },
       key: function(req, file, cb){
-          cb(null,file.fieldname +' '+req.body.index);  }
+          cb(null,file.fieldname +' '+req.body.categoryId+'-'+req.body.subcategoryId+'-'+req.body.productId+'-'+req.body.subproductId+'-'+req.body.index+' '+Date.now());  }
     }),
-  //  limits:{fileSize:1000000000},
-  //  fileFilter:function(res,file,cb){
-  //       checkFileType(file,cb)
-  //   }
+   limits:{fileSize:2000000},
+   fileFilter:function(res,file,cb){
+        checkFileType(file,cb)
+    }
   }).single('myImage');
 
 

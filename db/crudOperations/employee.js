@@ -2,7 +2,7 @@ const Emp=require("../schemas/empSchema");
 const Uid=require("uuid/v1");
 const fs=require("fs");
 const path=require("path");
-const mailUser=require('../../Utils/nodemailer')
+//const mailUser=require('../../Utils/email/nodemailer')
 const passwordEncryptor=require('../../Utils/passwordEncryptor')
 
 
@@ -45,7 +45,7 @@ const empCrud={
                     else{
                         console.log("record created");
                         res.json({isPresent:false});
-                        mailUser(object.email,object.name);
+                       // mailUser(object.email,object.name);
 
 
                     }    

@@ -1,12 +1,12 @@
 const multer=require('multer');
 const path=require('path');
-
+const awskey = require('./awskey');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 
 aws.config.update({
-  secretAccessKey: "",
-  accessKeyId: "",
+  secretAccessKey: awskey.secretAccessKey,
+  accessKeyId: awskey.accessKeyId,
   region: "ap-south-1"
 });
 

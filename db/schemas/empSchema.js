@@ -1,5 +1,5 @@
-const mongoose=require("mongoose");
-const connection=require("../connection");
+
+const mongoose=require("../connection");
 
 var Schema=mongoose.Schema;
 var empSchema=new Schema({
@@ -86,7 +86,7 @@ var empSchema=new Schema({
         policeVerification:{
             type:String,
         },
-        pancardPhoto:{
+        panCardPhoto:{
             type:String,
         },
         addressProof:{

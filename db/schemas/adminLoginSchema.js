@@ -1,5 +1,5 @@
-const mongoose=require("mongoose");
-const connection=require("../connection");
+//const mongoose=require("mongoose");
+const mongoose=require("../connection");
 
 const Schema=mongoose.Schema;
 

@@ -8,12 +8,13 @@ function checkFileType(file,cb){
     if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length-1]) === -1) {
         return cb(new Error('Wrong extension type'));
     }
+   
     cb(null, true);
     }
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/uploads')
+      cb(null, 'excel/uploads')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname)

@@ -3,6 +3,7 @@ const adschema = require('../schemas/adSchema');
 const getproducts= require('../../Utils/getProducts')
 const productSchema = require('../schemas/ProductSchema');
 const s3=require('../../Utils/multer/getImageFiles')
+const async = require('async')
 const adcrud={
     
   removeidvandreturnnew(obj){
@@ -77,10 +78,12 @@ else {
        adschema.ads.findOne({'category':obj.category},(err,ad)=>{
            if(err){
                res.status(403).json('DataBase Error');
-           }else if(ad!=null){
+               console.log(obj,'yes error');
+
+           }else if(ad!=null && obj.oldlabel!='null'){
                try{
                ad.subAds.forEach(subad=>{
-                   if(subad.label==obj.label){
+                   if(subad.label==obj.oldlabel){
                        ifFound=true;
                        if(subad.imageobj.url!=null){
                          
@@ -116,13 +119,14 @@ else {
                    }}
                })
                if(ifFound==false){
-                res.status(200).json(obj);
+                res.status(409).json('No Label Found');
             }
             }catch(e){
                 res.status(403).json('Logical Backend Error');
             }
            }
            else {
+               console.log('i was here')
                res.status(200).json(obj);
            }
        })
@@ -131,17 +135,48 @@ else {
 ,
 deleteAd(obj,res){
 if(obj.crud=='delete'){
-    adschema.ads.findOneAndDelete({category:obj.data},(err,doc)=>{
-       if(err){
-           res.status(403).json('DataBase Error');
-       }
-        else if(doc!=null){
-            res.status(200).json({'isDeleted':true});
+adschema.ads.findOne({category:obj.data},(err,doc)=>{ //delete old image files of removed
+    if(doc!=null){
+doc.subAds.forEach(subad=>{
+    
+    s3.headObject({
+        Bucket:"big-basket-state-store",
+        Key:subad.imageobj.key
+      },(err,data)=>{
+         
+         if(data!=null){
+        s3.deleteObject({
+            Bucket:"big-basket-state-store",
+            Key:subad.imageobj.key
+          },(err,data)=>{
+              
+           if(err){
+            res.status(403).json('Multer Error')
+           }
+           else if(data.DeleteMarker==true){
+             console.log('yes')
+          
+           }
+          })}
+      })
+    
+})
+    }
 
-        }else {
-            res.status(403).json('No Such Entry Found');
+    adschema.ads.findOneAndDelete({category:obj.data},(err,doc)=>{
+        if(err){
+            res.status(403).json('DataBase Error');
         }
-    })
+         else if(doc!=null){
+             res.status(200).json({'isDeleted':true});
+ 
+         }else {
+             res.status(403).json('No Such Entry Found');
+         }
+     })
+})
+
+ 
 }
 }
 ,
@@ -162,13 +197,13 @@ pushAd(obj,res){
      }
  })
 }else if(obj.crud=='new'){
-    console.log(obj.crud)
+    //console.log(obj.crud)
     let subaddarray=[];
     for(let childobj of (obj.data).subAds){
         
         let paramarray=[];
         for(let param of childobj.params){
-            console.log(param)
+          //  console.log(param)
            let newparam= new adschema.params({
                 keyword:param.keyword,
                 value:param.value,
@@ -203,7 +238,7 @@ subaddarray.push(sub);
            res.status(403).json('DataBase Error');
        }
        else {
-           console.log('yo')
+         //  console.log('yo')
            res.status(200).json({'isAdded':true});
        }
    })
@@ -216,53 +251,87 @@ else{
 ,
 getAllAds(res){
     let arrayofAdCrud=[];
-    adschema.ads.find({},(err,ads)=>{
-        if(err){
-        res.status(403).json('Data Base Error');
-        }
-        else if(ads!=null){
-    try{
-            let adarray=[];
+    let adarray=[];
+    // adschema.ads.find({},(err,ads)=>{
+    //     if(err){
+    //     res.status(403).json('Data Base Error');
+    //     }
+    //     else if(ads!=null){
+    // try{
+           
             
-        ads.forEach(ad => {
-       adarray.push(this.removeidvandreturnnew(ad)); 
-        });
-        arrayofAdCrud.push({'adalready':adarray});
+    //     ads.forEach(ad => {
+    //    adarray.push(this.removeidvandreturnnew(ad)); 
+    //     });
+    //     arrayofAdCrud.push({'adalready':adarray});
           
-    productSchema.Products.find({},(err,products)=>{
-        if(err){
-            res.json("some error occures");
-        }
-        else{
-            let array=[];
-          try{  
-          array=getproducts.getProducts(products)
-           arrayofAdCrud.push({'productAd':array});
-           if(arrayofAdCrud.length!=0){
-            console.log('i m here')
-                res.status(200).json(arrayofAdCrud);
-            }
-            //logger.debug(products);
-          }catch(e){
-            res.status(403).json('Logical Error');
-            return;
-          }
+    // productSchema.Products.find({},(err,products)=>{
+    //     if(err){
+    //         res.json("some error occures");
+    //     }
+    //     else{
+    //        // let array=[];
+    //       try{  
+    //      // array=getproducts.getProducts(products)
+    //        arrayofAdCrud.push({'productAd':products});
+    //        if(arrayofAdCrud.length!=0){
+    //         console.log('i m here')
+    //             res.status(200).json(arrayofAdCrud);
+    //         }
+    //         //logger.debug(products);
+    //       }catch(e){
+    //         res.status(403).json('Logical Error');
+    //         return;
+    //       }
           
-        }})
+    //     }})
         
 
-    }
-      catch(e){
-          res.status(403).json('Logical Error')
-    return;
-      }
+    // }
+    //   catch(e){
+    //       res.status(403).json('Logical Error')
+    // return;
+    //   }
       
-    }
-    else {
-        res.status(403).json('No data Found');
-        return;
-    }
-    })
+    // }
+    // else {
+    //     res.status(403).json('No data Found');
+    //     return;
+    // }
+    // })
+
+
+    async.parallel([
+        //Load Ad
+        function(callback) {
+            adschema.ads.find({},(err,ads)=>{
+                    if(err) return callback(err);
+                    ads.forEach(ad => {
+                          adarray.push(adcrud.removeidvandreturnnew(ad)); 
+                            });
+                        arrayofAdCrud.push({'adalready':adarray});
+
+                callback();
+            });
+        },
+        //Load posts
+        function(callback) {
+            productSchema.Products.find({},(err,products)=>{
+                if (err) return callback(err);
+          arrayofAdCrud.push({'productAd':products});
+                callback();
+            });
+        }
+    ], function(err) { //This function gets called after the two tasks have called their "task callbacks"
+        if (err) {
+            res.status(500).json('Some Error Occurred')
+        };
+        if(arrayofAdCrud.length!=0){
+            res.status(200).json(arrayofAdCrud);
+           // console.log(arrayofAdCrud)
+        }
+       
+    });
   
 }
 

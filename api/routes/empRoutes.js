@@ -8,7 +8,7 @@ const idGen=require('../../Utils/idGenerator/idGen');
 const nullChecker=require('../../Utils/nullChecker');
 const refCodeGen=require('../../Utils/referralGen/referralCode');
 const passwordEncryptor=require('../../Utils/passwordEncryptor');
-
+const empschema = require('../../db/schemas/empSchema')
 
  
 //var empCrud=require("../../db/crudOperations/employee");
@@ -47,9 +47,12 @@ empRoutes.post('/register',(req,res)=>{
                 }
             }
         }
-        nullChecker.check(req.body.mobile_no,res);
+        
+       // nullChecker.check(req.body.mobile_no,res);
         object.mobile_no=req.body.mobile_no;
-        object.selfReferralCode=refCodeGen.refCodeGen(req.body.mobile_no);
+      
+        object.selfReferralCode=refCodeGen.idgenerator(req.body.mobile_no);
+       
         object.email=req.body.email;
         object.qualification=req.body.qualification;
         object.referralCode=req.body.refferalCode;
@@ -65,22 +68,22 @@ empRoutes.post('/register',(req,res)=>{
         object.documents[0].pancardno=req.body.documents.pancardno;
         object.documents[0].bankacno=req.body.documents.bankacno;
         object.documents[0].nomineeAdhno=req.body.documents.nomineeAdhno;*/
-        for(let key in object.documents[0]){
-            if(req.body.documents!=null){
+     
                 for(let keyreq in req.body.documents){
                     if(keyreq!=null){
-                        if(key==keyreq){
-                            object.documents[0][key]=req.body.documents[keyreq];
+                        if(req.body.documents[keyreq]!=''){
+                            object.documents[0][keyreq]=req.body.documents[keyreq];
+                        }else{
+                            object.documents[0][keyreq]=null;
                         }
                     }
                 }
-            }
-        }
+         
       
         for(let key in object.ImageUrls[0]){
                       if(req.body.filesurl!=null){ 
                       req.body.filesurl.forEach(obj=>{
-                          console.log(obj);
+                         // console.log(obj);
                         for(let filekey in obj){
                          
                             if(filekey!=null){
@@ -93,66 +96,82 @@ empRoutes.post('/register',(req,res)=>{
      }
                                    
        
-        console.log(req.body.date_of_birth);
+      //  console.log(req.body.date_of_birth);
 
         empCrud.doRegister(req,res,object);
 
 });
+empRoutes.post('/checkUser',(req,res)=>{
+    console.log(req.body.mobile_no);
+    if(req.body.mobile_no!=null){
+        empschema.findOne({mobile_no:req.body.mobile_no},(err,doc)=>{
+            if(err){
+                res.status(409).json(err);
+                        }else if(doc!=null){
+res.status(409).json({message:'User Already Exist'})
+                        }else{
+                            res.status(200).json({isPresent:false})
+                        }
+        })
+    }else{
+        res.status(409).json('Null Mobile No')
+    }
+})
 
 
 //--naveen
 empRoutes.post("/upload",(req,res)=>{
 
-        console.log("trying to upload");
-        upload.upload(req,res,function(err){
-            if(err instanceof multer.MulterError){
-                console.log("hi"+err);
-                logger.debug('multer error occured',err);
-                res.status(500).json(err);
-            }
-            else if(err){
-                console.log(err);
-                logger.debug('some error occured',err);
-                res.status(500).json(err);
     
+            upload.upload(req,res,function(err){
+                if(err instanceof multer.MulterError){
+                //    console.log("hi"+err);
+                    logger.debug('multer error occured',err);
+                    res.status(500).json(err);
+                }
+                else if(err){
+               //console.log(err);
+                    logger.debug('some error occured',err);
+                    res.status(500).json(err);
+        
+                    
+                }else{
                 
-            }
-            
-            console.log(req.files);
-            console.log("trying to upload file");
-            logger.debug('trying to upload files');
-            if(req.files!=null){
-            upload.files.imageUrls.forEach(uploadObj=>{
-            for(let ukeys in uploadObj){
-              
-               for(let key in req.files){
-                if(key==ukeys){
-                uploadObj[ukeys]=req.files[key][0].location; 
-            }
-      
-          };
-    }
-    })
-             
-            }
-            else{
-                logger.debug('error during file upload');
-                res.status(403).json({err:"couldnt upload files"});
-            }
-           // upload.files.id=req.files;
-           upload.files.id=idGen.idgenerator(req.body.mobile_no);
-           if(upload.files.id==null){
-               res.status(500).json("please provide the mobile no");
-           }
-           else{
-           console.log(upload.files);
-           
-            res.json(upload.files);
-           }            
-
-    
-     
+              //  console.log(req.files);
+              //  console.log("trying to upload file");
+                logger.debug('trying to upload files');
+                if(req.files!=null){
+                upload.files.imageUrls.forEach(uploadObj=>{
+                for(let ukeys in uploadObj){
+                  
+                   for(let key in req.files){
+                    if(key==ukeys){
+                    uploadObj[ukeys]=req.files[key][0].location; 
+                }
+          
+              };
+        }
         })
+                 
+                }
+               
+               // upload.files.id=req.files;
+               upload.files.id=idGen.idgenerator(req.body.mobile_no);
+               if(upload.files.id==null){
+                   res.status(500).json("please provide the mobile no");
+               }
+               else{
+               console.log(upload.files);
+               
+                res.json(upload.files);
+               }   
+            }         
+    
+        
+         
+            })
+        
+      
 }); 
     
     

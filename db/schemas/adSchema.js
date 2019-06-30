@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const connection=require("../connection");
-const Schema= mongoose.Schema();
+//const mongoose = require('mongoose');
+const mongoose=require("../connection");
+const Schema= mongoose.Schema;
 
  const params= new mongoose.Schema({
      keyword:String,

@@ -46,3 +46,127 @@
 {"level":"debug","message":{},"timestamp":"2019-04-21T10:40:04.951Z"}
 {"level":"debug","message":{},"timestamp":"2019-04-21T10:40:05.708Z"}
 {"level":"debug","message":{},"timestamp":"2019-04-21T10:42:19.197Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:26:01.032Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:27:53.938Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:28:31.609Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:32:27.954Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:33:08.555Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:34:02.816Z"}
+{"level":"debug","message":{"errno":-2,"code":"ENOENT","syscall":"open","path":"/uploads/categories","storageErrors":[]},"timestamp":"2019-05-23T07:38:18.359Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:02:08.305Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:02:13.322Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:03:11.364Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:03:20.620Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:05:14.773Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:06:08.004Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:06:28.087Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:06:45.791Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:06:52.959Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:08:08.573Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:09:32.308Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T16:10:36.757Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T19:22:36.641Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-01T19:25:01.384Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-02T08:51:06.783Z"}
+{"level":"debug","message":{"message":"Callback must be a function, got [object Object]","name":"MongooseError"},"timestamp":"2019-06-02T08:51:50.643Z"}
+{"level":"debug","message":{"message":"Callback must be a function, got [object Object]","name":"MongooseError"},"timestamp":"2019-06-02T08:53:37.779Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-02T11:53:08.465Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-02T11:56:47.083Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-04T18:24:15.650Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-04T18:31:53.586Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-04T19:51:02.030Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-04T19:52:01.217Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:36:34.669Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:36:34.686Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:37:46.872Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:37:46.886Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:38:54.690Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:38:54.694Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:40:29.223Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:40:29.227Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:41:37.093Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:41:37.098Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:44:14.042Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:44:14.046Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:48:14.555Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:48:14.558Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:49:21.974Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:49:21.979Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:52:39.744Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T10:52:39.768Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:31:32.903Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:31:32.948Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:33:48.839Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:33:48.879Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:36:35.088Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:36:35.132Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:37:30.075Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:37:30.107Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:38:40.817Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:38:40.849Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:39:07.055Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:39:07.070Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:41:42.610Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T11:41:42.785Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-05T16:01:16.138Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:01:29.319Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:03:01.315Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:04:00.642Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:04:07.000Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:05:55.749Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:10:58.055Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:12:54.570Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:13:50.093Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-05T16:14:40.617Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T10:56:15.577Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:14:32.713Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:15:32.302Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:17:23.999Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:17:52.350Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:18:38.737Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:19:20.267Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-07T21:20:16.573Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-12T12:12:27.156Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-12T21:18:00.948Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:26:00.316Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:27:40.811Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:27:58.167Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:32:34.867Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:33:17.351Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T20:43:18.333Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:15:26.888Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:15:26.940Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:15:26.944Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:16:38.554Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:16:38.602Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:16:38.606Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:18:03.895Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:18:03.934Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:18:03.938Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:21:35.490Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T21:51:44.233Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:06:21.765Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:12:43.651Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:14:35.932Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:15:37.847Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:17:01.247Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:19:40.146Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:26:19.519Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:28:50.399Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:41:54.301Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:43:49.328Z"}
+{"message":"trying to upload files","level":"debug","timestamp":"2019-06-13T22:44:40.024Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-18T19:16:41.207Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-19T21:27:45.585Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:34:47.873Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:38:29.815Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:39:08.740Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:43:07.750Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:45:15.139Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:46:09.730Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:47:19.361Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-20T22:48:15.270Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-29T05:24:12.674Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-29T05:24:12.690Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-29T05:25:59.717Z"}
+{"level":"debug","message":{},"timestamp":"2019-06-29T05:26:01.675Z"}

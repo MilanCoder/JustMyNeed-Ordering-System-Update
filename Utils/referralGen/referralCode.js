@@ -9,7 +9,9 @@ const refCodeGen={
     },
 
     idgenerator(no)
-    {   if(no!=null&& typeof(no)==number){
+    {  
+        console.log(no,typeof(no))
+        if(no!=null&& typeof(no)=="string"){
         let str;
         let random=shortid.generate()
 

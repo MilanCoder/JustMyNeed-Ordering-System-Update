@@ -7,6 +7,12 @@ ProductRoutes.get('/getProducts',(req,res)=>{
             productCrud.getProducts(req,res);
 })
 
+ProductRoutes.post('/searchquery',(req,res)=>{
+
+    if(req.body.category!=null){
+    productCrud.searchsp(req,res);
+}})
+
 
      
 module.exports=ProductRoutes;
