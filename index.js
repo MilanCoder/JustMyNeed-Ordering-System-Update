@@ -23,14 +23,19 @@ const productRoutes=require('./api/routes/productRoutes');
 const adRoutes = require('./api/routes/adRoutes');
 const customerRoutes = require('./api/routes/customerRoutes')
 const footerRoutes = require('./api/routes/footerApi');
-
+const voucherRoutes = require('./api/routes/voucherApi');
+const templateRoutes = require('./api/routes/templateApi');
+const addressRoutes = require('./api/routes/addressRoutes');
+app.use('/address',addressRoutes);
+app.use('/template',templateRoutes)
+app.use('/voucher',voucherRoutes);
 app.use('/footer',footerRoutes);
 app.use('/employee',empRoutes); 
 app.use('/admin',adminRoutes);  
 app.use('/products',productRoutes); 
 app.use('/vendorProducts',vendorProductRoutes);   
 app.use('/ad',adRoutes);   
-app.use('/customer',customerRoutes)            //use routes
+app.use('/customer',customerRoutes)           //use routes
 //app.use('/user');
 
 

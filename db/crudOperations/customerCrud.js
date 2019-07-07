@@ -2,12 +2,16 @@
  const custIdGen = require('../../Utils/idGenerator/custIdGen');
  const respmessage= require('../../Utils/comments');
  const config = require('../../Utils/statusconfig');
+ const mailUser = require('../../Utils/email/contactusmail');
+ const AddressotpCrud=require('../../Utils/email/generateotp');
 const customerCrud={
 
 async signUp(custObj){
     let returncustomer=null;
 try{
-   let customer =await Customer.Customer.findOne({'email':custObj.email});
+   let customer =await Customer.Customer.findOne({'email':custObj.email}).catch(err=>{
+       return null;
+   });
    if(customer!=null){  
       returncustomer=respmessage.isalreadypresent;
      }
@@ -22,6 +26,31 @@ try{
     return returncustomer='error';
     
 }},
+
+
+checkOrderAddressOTP(otp,res){
+ // console.log(AddressotpCrud.checkOtp(otp))
+if(AddressotpCrud.checkOtp(otp)!=false){
+  
+    res.status(200).json({status:config.VALIDOTP,isValid:true});
+}else{
+    res.status(409).json({status:config.INVALIDOTP,message:'Incorrect OTP'})
+}
+
+}
+,
+createOrderAddressOTP(emailobj,res){
+mailUser(emailobj.email,emailobj.firstName).then(data=>{
+    if(data!=null){
+      //  console.log(data);
+        res.status(200).json({status:config.SUCCESS,isCreated:true,timeRemain:data.timeRemain});
+    }
+ 
+}),err=>{
+    res.status(409).json({status:config.ERROR,message:err})
+};
+}
+,
 
 getCustomer(id,res){
 Customer.Customer.findOne({customerId:id},(err,customer)=>{

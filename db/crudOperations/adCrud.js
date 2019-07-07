@@ -1,9 +1,11 @@
 //milan
+const productCrud = require('../crudOperations/Product')
 const adschema = require('../schemas/adSchema');
 const getproducts= require('../../Utils/getProducts')
 const productSchema = require('../schemas/ProductSchema');
 const s3=require('../../Utils/multer/getImageFiles')
-const async = require('async')
+const async = require('async');
+const joins = require('../../Utils/productJoins')
 const adcrud={
     
   removeidvandreturnnew(obj){
@@ -252,85 +254,46 @@ else{
 getAllAds(res){
     let arrayofAdCrud=[];
     let adarray=[];
-    // adschema.ads.find({},(err,ads)=>{
-    //     if(err){
-    //     res.status(403).json('Data Base Error');
-    //     }
-    //     else if(ads!=null){
-    // try{
-           
-            
-    //     ads.forEach(ad => {
-    //    adarray.push(this.removeidvandreturnnew(ad)); 
-    //     });
-    //     arrayofAdCrud.push({'adalready':adarray});
-          
-    // productSchema.Products.find({},(err,products)=>{
-    //     if(err){
-    //         res.json("some error occures");
-    //     }
-    //     else{
-    //        // let array=[];
-    //       try{  
-    //      // array=getproducts.getProducts(products)
-    //        arrayofAdCrud.push({'productAd':products});
-    //        if(arrayofAdCrud.length!=0){
-    //         console.log('i m here')
-    //             res.status(200).json(arrayofAdCrud);
-    //         }
-    //         //logger.debug(products);
-    //       }catch(e){
-    //         res.status(403).json('Logical Error');
-    //         return;
-    //       }
-          
-    //     }})
-        
-
-    // }
-    //   catch(e){
-    //       res.status(403).json('Logical Error')
-    // return;
-    //   }
-      
-    // }
-    // else {
-    //     res.status(403).json('No data Found');
-    //     return;
-    // }
-    // })
-
-
     async.parallel([
         //Load Ad
-        function(callback) {
+        function(cb) {
             adschema.ads.find({},(err,ads)=>{
-                    if(err) return callback(err);
+                    if(err) return cb(err);
                     ads.forEach(ad => {
                           adarray.push(adcrud.removeidvandreturnnew(ad)); 
                             });
                         arrayofAdCrud.push({'adalready':adarray});
 
-                callback();
+                cb(null,adarray);
             });
         },
-        //Load posts
-        function(callback) {
-            productSchema.Products.find({},(err,products)=>{
-                if (err) return callback(err);
-          arrayofAdCrud.push({'productAd':products});
-                callback();
-            });
-        }
-    ], function(err) { //This function gets called after the two tasks have called their "task callbacks"
+        productCrud.getCategoriesArray(),
+        productCrud.getSubcategoriesArray(),
+        productCrud.getProductsArray(),
+        productCrud.getSubProductsArray()
+
+    ], function(err,results) { //This function gets called after the two tasks have called their "task callbacks"
         if (err) {
             res.status(500).json('Some Error Occurred')
-        };
+        }else{
+            console.log(results[0]);
+            let categories=[];
+            let  products=joins.joinProducts(results[3],results[4]);
+              //console.log(products);
+          
+             let subcategory=joins.joinSubcategory(results[2],products);
+             // console.log(subcategory);
+  
+            categories=joins.joinExcelData(results[1],subcategory);  //final data after nesting
+              //console.log(categories);
+              arrayofAdCrud.push({productAd:categories})
+  
+        
         if(arrayofAdCrud.length!=0){
             res.status(200).json(arrayofAdCrud);
            // console.log(arrayofAdCrud)
         }
-       
+    }
     });
   
 }

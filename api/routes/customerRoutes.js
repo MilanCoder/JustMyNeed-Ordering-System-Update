@@ -18,11 +18,35 @@ const respmsg= require('../../Utils/comments');
 const checkOrder=require('../../Utils/middleware/checkOrder');
 const delLevelCrud=require('../../db/crudOperations/delivLevelCrud');
 
+
+customerRoutes.post('/checkOrderAddressOTP',jwtVerification.verifyToken,(req,res)=> {
+    // let stackTrace=req.body.stackTrace;
+    jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
+        if(err){
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
+        }else{
+            console.log(req.body);
+    customerCrud.checkOrderAddressOTP(req.body.otp,res);
+}
+})
+})
+
+customerRoutes.get('/createOrderAddressOTP',jwtVerification.verifyToken,(req,res)=> {
+    // let stackTrace=req.body.stackTrace;
+    jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
+        if(err){
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
+        }else{
+    customerCrud.createOrderAddressOTP(authData.userobj,res);
+}
+})
+})
+
 customerRoutes.post('/cart/addProduct',jwtVerification.verifyToken,checkQuantity,(req,res)=> {
     // let stackTrace=req.body.stackTrace;
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
           
             if(req.body.crud=='add') {
@@ -34,10 +58,20 @@ customerRoutes.post('/cart/addProduct',jwtVerification.verifyToken,checkQuantity
         }
     })
 });
+
+customerRoutes.get('/voucher/getVouchers',jwtVerification.verifyToken,(req,res)=>{
+    jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
+        if(err){
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
+        }else{
+           orderCrud.getAllVouchers(res);
+        }})
+})
+
 customerRoutes.get('/cart/getCartData',jwtVerification.verifyToken,(req,res)=>{
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
             cartOperations.getCartData(authData.userobj.customerId,res);
         }})
@@ -46,7 +80,7 @@ customerRoutes.get('/cart/getCartData',jwtVerification.verifyToken,(req,res)=>{
 customerRoutes.post('/cart/deleteProduct',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
             if(req.body.crud =='del'){
                 let currentquantity = req.body.cartProduct.quantity;
@@ -59,7 +93,7 @@ customerRoutes.post('/cart/deleteProduct',jwtVerification.verifyToken,(req,res)=
 customerRoutes.post('/cart/deletecartProduct',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
            console.log(req.body);
             if(req.body!=null){
@@ -74,7 +108,7 @@ customerRoutes.post('/cart/deletecartProduct',jwtVerification.verifyToken,(req,r
 customerRoutes.post('/setCurrAdd',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
             if(req.body.addId!=null){
 customerCrud.setCurrentAdd(authData.userobj,req.body.addId,res);
@@ -90,7 +124,7 @@ customerCrud.setCurrentAdd(authData.userobj,req.body.addId,res);
 customerRoutes.post('/cart/emptycart',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
            console.log(req.body);
             if(req.body!=null){
@@ -109,7 +143,7 @@ customerRoutes.post('/cart/emptycart',jwtVerification.verifyToken,(req,res)=> {
 customerRoutes.get('/getOngoingOrder',jwtVerification.verifyToken,(req,res)=> { //get all incompleted orders of customer
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-res.status(409).json({status:config.ERROR,message:'JWT Error'})
+res.status(409).json({status:config.ERROR,message:'Session TimeOut'})
         }else{
           //  console.log('here');
 orderCrud.getOrder(authData.userobj,false,res);
@@ -133,19 +167,19 @@ customerRoutes.post('/getEXPDelivDetails',(req,res)=>{
 customerRoutes.post('/getSingleLevel',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
             delLevelCrud.getDeliveryAndSingleLevel(req.body,res);
             
         }})})
 
-customerRoutes.get('/order/orderSum',jwtVerification.verifyToken,(req,res)=> {
+customerRoutes.post('/order/orderSum',jwtVerification.verifyToken,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
           //  console.log('here');
-orderCrud.orderSum(authData.userobj,res);
+orderCrud.orderSum(authData.userobj,req.body.voucherCode,res);
         }
     })
 }),
@@ -153,7 +187,7 @@ orderCrud.orderSum(authData.userobj,res);
 customerRoutes.post('/order/placeOrder',jwtVerification.verifyToken,checkOrder,(req,res)=> {
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
     orderCrud.addOrder(req.order,req.timeAndTypeSlot,authData.userobj,res);
 }})
@@ -162,7 +196,7 @@ customerRoutes.post('/order/placeOrder',jwtVerification.verifyToken,checkOrder,(
 customerRoutes.post('/filldetails',jwtVerification.verifyToken,checkAddress,(req,res)=>{
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
            // console.log(authData.userobj,req.addressobj,req.mobile_no)
         customerCrud.filldetails(authData.userobj,req.addressobj,req.isdefault,res)
@@ -172,7 +206,7 @@ customerRoutes.post('/filldetails',jwtVerification.verifyToken,checkAddress,(req
 customerRoutes.post('/order/singleOrder',jwtVerification.verifyToken,(req,res)=>{  //single order based on param
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
             orderCrud.getSingleOrder(req.body.orderId,authData.userobj,res);
        
@@ -183,7 +217,7 @@ customerRoutes.post('/order/singleOrder',jwtVerification.verifyToken,(req,res)=>
 customerRoutes.get('/getAddressData',jwtVerification.verifyToken,(req,res)=>{
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
           
             customerCrud.getCustomerAddress(authData.userobj,res);
@@ -194,7 +228,7 @@ customerRoutes.get('/getAddressData',jwtVerification.verifyToken,(req,res)=>{
 customerRoutes.get('/getProfileData',jwtVerification.verifyToken,(req,res)=>{
     jwt.verify(req.token,jwtVerification.custSecurekey,(err,authData)=>{
         if(err){
-            res.status(409).json({status:config.ERROR,message:'JWT Error'});
+            res.status(409).json({status:config.ERROR,message:'Session TimeOut'});
         }else{
           
             customerCrud.getData(authData.userobj,res);
