@@ -28,6 +28,11 @@ or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+## Ordering System Update
+ The system has created schemas for order alongwith paytm integration, and getting the desired data for the delivery boy.
+ Ordering system caters the option for selecting address for delivering, the gift card details and the order, after this is done the user can track the order.
+
+
 ## Documentation
 
 For more information about using Node.js on Heroku, see these Dev Center articles:
