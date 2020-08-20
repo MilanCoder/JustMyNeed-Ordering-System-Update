@@ -6,7 +6,7 @@
   "dependencies": {
     "async": "^3.0.1",
     "aws-sdk": "^2.413.0",
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
